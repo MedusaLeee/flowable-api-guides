@@ -1,4 +1,4 @@
-package com.viathink.deploy;
+package com.viathink.flowable;
 
 import org.flowable.engine.*;
 import org.flowable.engine.impl.cfg.StandaloneProcessEngineConfiguration;
@@ -18,7 +18,7 @@ import java.util.Map;
 
 import static junit.framework.TestCase.assertNotNull;
 
-public class DeployTest {
+public class Part1 {
 
     private ProcessEngine processEngine = null;
     @Before
