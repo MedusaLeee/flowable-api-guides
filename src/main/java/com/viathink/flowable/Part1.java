@@ -21,10 +21,7 @@ import static junit.framework.TestCase.assertNotNull;
 public class Part1 {
 
     private ProcessEngine processEngine = null;
-    @Before
-    public void setUp() {
-        System.out.println("before....");
-    }
+    // 初始化流程引擎
     @Before
     public void createDeployment() {
         ProcessEngineConfiguration cfg = new StandaloneProcessEngineConfiguration();
@@ -35,6 +32,7 @@ public class Part1 {
         cfg.setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE);
         processEngine = cfg.buildProcessEngine();
     }
+    // 添加用户和组
     @Test
     public void addGroupAndUser() {
         IdentityService identityService = processEngine.getIdentityService();
@@ -72,6 +70,7 @@ public class Part1 {
         // 用户加入组
         identityService.createMembership("kangbeibei", "manager");
     }
+    // 部署流程
     @Test
     public void deployProcess() throws Exception {
         RepositoryService repositoryService = processEngine.getRepositoryService();
@@ -104,13 +103,26 @@ public class Part1 {
         // 如果多个key相同的流程定义，会启动version最高的流程
         // 操作数据库的act_ru_execution表,如果是用户任务节点，同时也会在act_ru_task添加一条记录
         // 设置流程变量的时候，会向act_ru_variable表添加数据
-        // TODO 流程变量的作用域？
         Map<String, Object> variableMap = new HashMap<String, Object>();
         variableMap.put("sheetId", sheetId);
         variableMap.put("sheetName", sheetName);
         ProcessInstance pi = runtimeService.startProcessInstanceByKey("myProcess", variableMap);
         assertNotNull(pi);
         System.out.println("pid: " + pi.getId() + ",activitiId: " + pi.getActivityId() + ",pdId: " + pi.getProcessDefinitionId());
+    }
+    @Test
+    public void setVariables() {
+        // 设置流程变量可以有2种方式，流程变量作用域也有区别
+        // 1. 通过RuntimeService
+        String executionId = "5004";
+        RuntimeService runtimeService = processEngine.getRuntimeService();
+        // 设置的是全局的流程变量，流程开始到结束都可以获取，相同的key，后面的会覆盖前面的，版本 + 1，被覆盖的也会进入历史表
+        runtimeService.setVariable(executionId, "variable1", "variable1");
+        // 2. 通过TaskService
+        String taskId = "5007";
+        TaskService taskService = processEngine.getTaskService();
+        // 设置的是当前任务的流程变量，任务结束后就会进入历史表
+        taskService.setVariableLocal(taskId, "variable2", "variable2");
     }
     // 获取某个用户的待审批任务
     @Test
