@@ -19,6 +19,9 @@ import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.assertNull;
 
+/**
+ * 委派
+ */
 public class Part2 {
     private ProcessEngine processEngine = null;
     // 初始化流程引擎
