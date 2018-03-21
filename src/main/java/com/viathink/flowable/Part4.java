@@ -5,6 +5,7 @@ import org.flowable.engine.impl.cfg.StandaloneProcessEngineConfiguration;
 import org.flowable.engine.repository.ProcessDefinition;
 import org.flowable.engine.repository.ProcessDefinitionQuery;
 import org.flowable.engine.runtime.ProcessInstance;
+import org.flowable.engine.task.Comment;
 import org.flowable.task.api.Task;
 import org.junit.Before;
 import org.junit.Test;
@@ -111,12 +112,28 @@ public class Part4 {
             System.out.println("assignee: " + task.getAssignee());
         }
     }
-    // 先完成任务，再回退
     @Test
     public void completeTask() {
         String taskId = "52502";
         TaskService taskService = processEngine.getTaskService();
         // 对于执行完的任务，activiti将从act_ru_task表中删除该任务，下一个任务会被插入进来
         taskService.complete(taskId);
+    }
+    @Test
+    public void completeTaskWithComment() {
+        String taskId = "52502";
+        String userId = "lijianxun";
+        IdentityService identityService = processEngine.getIdentityService();
+        identityService.setAuthenticatedUserId(userId);
+        TaskService taskService = processEngine.getTaskService();
+        Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
+        taskService.addComment(taskId, task.getProcessInstanceId(), "同意，审批通过");
+        // 对于执行完的任务，activiti将从act_ru_task表中删除该任务，下一个任务会被插入进来
+        taskService.complete(taskId);
+        // 查找流程实例的审批意见 #247
+        List<Comment> taskComments = taskService.getProcessInstanceComments(task.getProcessInstanceId());
+        for(Comment c: taskComments) {
+            System.out.printf("任务: %s, 审批人：%s， 审批意见: %s", c.getTaskId(), c.getUserId(), c.getFullMessage());
+        }
     }
 }
