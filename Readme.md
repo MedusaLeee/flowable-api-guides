@@ -10,8 +10,10 @@
 
 3. [审批意见支持](./src/main/java/com/viathink/flowable/Part4.java)
 
-4. 分支、会签 TODO
+4. [并行、互斥网关](./src/main/java/com/viathink/flowable/Part5.java)
 
-5. 审批历史 TODO
+5. 会签 TODO
 
-6. [事件监听](./src/main/java/com/viathink/flowable/Part4.java)
+6. 审批历史 TODO
+
+7. [事件监听](./src/main/java/com/viathink/flowable/Part4.java)
