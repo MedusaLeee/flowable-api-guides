@@ -12,8 +12,10 @@
 
 4. [并行、互斥网关](./src/main/java/com/viathink/flowable/Part5.java)
 
-5. 会签 TODO
+5. [事件监听](./src/main/java/com/viathink/flowable/Part4.java)
 
 6. [审批历史](./src/main/java/com/viathink/flowable/Part6.java)
 
-7. [事件监听](./src/main/java/com/viathink/flowable/Part4.java)
+7. [通过流程变量查询历史流程实例](./src/main/java/com/viathink/flowable/Part6.java)
+
+8. 会签 TODO

@@ -108,4 +108,23 @@ public class Part6 {
             System.out.println("variableValue: " + hvi.getValue());
         }
     }
+    // 通过流程变量查询历史流程实例
+    @Test
+    public void queryProcessInstanceByVariable() {
+        HistoryService historyService = processEngine.getHistoryService();
+        List<HistoricProcessInstance> hpiList = historyService.createHistoricProcessInstanceQuery()
+                .variableValueEquals("sheetId", "12345")
+                .orderByProcessInstanceStartTime()
+                .desc()
+                .list();
+        for (HistoricProcessInstance hpi: hpiList) {
+            System.out.println("pId: " + hpi.getId());
+            System.out.println("pdId: " + hpi.getProcessDefinitionId());
+            System.out.println("businessKey: " + hpi.getBusinessKey());
+            System.out.println("startTime: " + hpi.getStartTime());
+            System.out.println("endTime: " + hpi.getEndTime());
+            System.out.println("duration: " + hpi.getDurationInMillis());
+            System.out.println("----------------------------------------");
+        }
+    }
 }
