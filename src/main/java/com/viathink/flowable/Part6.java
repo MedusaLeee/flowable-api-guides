@@ -4,22 +4,11 @@ import org.flowable.engine.*;
 import org.flowable.engine.history.HistoricActivityInstance;
 import org.flowable.engine.history.HistoricProcessInstance;
 import org.flowable.engine.impl.cfg.StandaloneProcessEngineConfiguration;
-import org.flowable.engine.repository.ProcessDefinition;
-import org.flowable.engine.repository.ProcessDefinitionQuery;
-import org.flowable.engine.runtime.ProcessInstance;
-import org.flowable.idm.api.User;
-import org.flowable.task.api.Task;
 import org.flowable.task.api.history.HistoricTaskInstance;
 import org.flowable.variable.api.history.HistoricVariableInstance;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.FileInputStream;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import static junit.framework.TestCase.assertNotNull;
 
 public class Part6 {
 
