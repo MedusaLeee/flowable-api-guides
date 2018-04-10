@@ -68,6 +68,7 @@ public class Part7 {
         Map<String, Object> variableMap = new HashMap<String, Object>();
         variableMap.put("sheetId", sheetId);
         variableMap.put("sheetName", sheetName);
+        // 通过此流程变量来指定会签的人员
         variableMap.put("assigneeList", Arrays.asList("lijianxun", "guoshuang", "kangbeibei"));
         ProcessInstance pi = runtimeService.startProcessInstanceByKey("countersign", variableMap);
         assertNotNull(pi);
