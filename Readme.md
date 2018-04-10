@@ -4,9 +4,9 @@
 
 ## Demo列表
 
-1. [简单顺序审批Demo](https://github.com/nodejs-viathink/flowable-api-guides/blob/master/src/main/java/com/viathink/flowable/Part1.java)
+1. [简单顺序审批Demo](./src/main/java/com/viathink/flowable/Part1.java)
 
-2. [委派](https://github.com/MedusaLeee/flowable-api-guides/blob/master/src/main/java/com/viathink/flowable/Part2.java)、[撤回](./src/main/java/com/viathink/flowable/Part3.java)
+2. [委派](./src/main/java/com/viathink/flowable/Part2.java)、[撤回](./src/main/java/com/viathink/flowable/Part3.java)
 
 3. [审批意见支持](./src/main/java/com/viathink/flowable/Part4.java)
 
